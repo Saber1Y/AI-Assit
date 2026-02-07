@@ -1,171 +1,103 @@
-import Image from "next/image";
+"use client";
 
-const KeyFilesSection = () => (
-  <div className="bg-white px-8 py-4">
-    <h2 className="text-xl font-semibold mb-4">How it works:</h2>
-    <ul className="space-y-4 text-gray-600">
-      <li className="flex items-start gap-2">
-        <span>📄</span>
-        <span>
-          <code className="font-medium">src/app/layout.tsx</code> - Main layout
-          with TamboProvider
-        </span>
-      </li>
-      <li className="flex items-start gap-2">
-        <span>📄</span>
-        <span>
-          <code className="font-medium font-mono">src/app/chat/page.tsx</code> -
-          Chat page with TamboProvider and MCP integration
-        </span>
-      </li>
-      <li className="flex items-start gap-2">
-        <span>📄</span>
-        <span>
-          <code className="font-medium font-mono">
-            src/app/interactables/page.tsx
-          </code>{" "}
-          - Interactive demo page with tools and components
-        </span>
-      </li>
-      <li className="flex items-start gap-2">
-        <span>📄</span>
-        <span>
-          <code className="font-medium font-mono">
-            src/components/tambo/message-thread-full.tsx
-          </code>{" "}
-          - Chat UI
-        </span>
-      </li>
-      <li className="flex items-start gap-2">
-        <span>📄</span>
-        <span>
-          <code className="font-medium font-mono">
-            src/components/tambo/graph.tsx
-          </code>{" "}
-          - A generative graph component
-        </span>
-      </li>
-      <li className="flex items-start gap-2">
-        <span>📄</span>
-        <span>
-          <code className="font-medium font-mono">
-            src/services/population-stats.ts
-          </code>{" "}
-          - Example tool implementation with mock population data
-        </span>
-      </li>
-      <li className="flex items-start gap-2">
-        <span className="text-blue-500">📄</span>
-        <span>
-          <code className="font-medium font-mono">src/lib/tambo.ts</code> -
-          Component and tool registration
-        </span>
-      </li>
-      <li className="flex items-start gap-2">
-        <span className="text-blue-500">📄</span>
-        <span>
-          <code className="font-medium font-mono">README.md</code> - For more
-          details check out the README
-        </span>
-      </li>
-    </ul>
-    <div className="flex gap-4 flex-wrap mt-4">
-      <a
-        href="/projects"
-        className="px-6 py-3 rounded-md font-medium transition-colors text-lg mt-4 bg-[#7FFFC3] hover:bg-[#72e6b0] text-gray-800"
-      >
-        🎯 AI Project Manager →
-      </a>
-      <a
-        href="/chat"
-        className="px-6 py-3 rounded-md font-medium transition-colors text-lg mt-4 bg-[#FFE17F] hover:bg-[#f5d570] text-gray-800"
-      >
-        💬 General Chat →
-      </a>
-      <a
-        href="/analytics"
-        className="px-6 py-3 rounded-md font-medium transition-colors text-lg mt-4 bg-[#E0E7FF] hover:bg-[#c7d2fe] text-gray-800"
-      >
-        📊 Analytics Dashboard →
-      </a>
-        <a
-        href="/interactables"
-        className="px-6 py-3 rounded-md font-medium transition-colors text-lg mt-4 bg-[#E0E7FF] hover:bg-[#c7d2fe] text-gray-800"
-      >
-        🎨 Component Demo →
-      </a>
-    </div>
-    
-    <div className="mt-8 p-6 bg-gray-50 rounded-lg border border-gray-200">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">✨ New Integrations</h3>
-      <div className="space-y-3 text-sm text-gray-700">
-        <div>
-          <strong>🔗 Linear MCP Integration:</strong> Connect to Linear for real-time project management with OAuth authentication.
-        </div>
-        <div>
-          <strong>🎯 AI Project Manager:</strong> Complete project management UI with kanban boards, team workload, and interactive components.
-        </div>
-      </div>
-      <div className="mt-4">
-        <a 
-          href="/projects" 
-          className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
-        >
-          Try AI Project Manager
-        </a>
-      </div>
-    </div>
-  </div>
-);
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen p-8 flex flex-col items-center justify-center font-[family-name:var(--font-geist-sans)]">
-      <main className="max-w-2xl w-full space-y-8">
-        <div className="flex flex-col items-center">
-          <a href="https://tambo.co" target="_blank" rel="noopener noreferrer">
-            <Image
-              src="/Octo-Icon.svg"
-              alt="Tambo AI Logo"
-              width={80}
-              height={80}
-              className="mb-4"
-            />
-          </a>
-          <h1 className="text-4xl text-center">Generative Analytics Dashboard</h1>
-          <p className="text-lg text-muted-foreground text-center mt-2">
-            AI-powered data visualization and business intelligence
-          </p>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
+      <div className="text-center px-6 py-12">
+        <div className="max-w-4xl mx-auto">
+          {/* Hero Section */}
+          <div className="text-center mb-16">
+            <h1 className="text-6xl font-bold tracking-tight text-gray-900 mb-6">
+              AI Project Manager
+            </h1>
+            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+              Manage your projects at the speed of thought with AI-powered
+              intelligence
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <Link
+                href="/projects"
+                className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-all duration-300 shadow-2xl hover:shadow-3xl transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-offset-2"
+              >
+                Launch AI Project Manager
+              </Link>
+            </div>
+          </div>
         </div>
 
-        <div className="w-full space-y-8">
-          <div className="bg-white px-8 py-4">
-            <h2 className="text-xl font-semibold mb-4">Explore Features</h2>
-            <div className="flex gap-4 flex-wrap">
-              <a
-                href="/analytics"
-                className="px-6 py-3 rounded-md font-medium shadow-sm transition-colors text-lg mt-4 bg-[#7FFFC3] hover:bg-[#72e6b0] text-gray-800"
-              >
-                Analytics Dashboard →
-              </a>
-              <a
-                href="/chat"
-                className="px-6 py-3 rounded-md font-medium shadow-sm transition-colors text-lg mt-4 bg-[#FFE17F] hover:bg-[#f5d570] text-gray-800"
-              >
-                General Chat →
-              </a>
-              <a
-                href="/interactables"
-                className="px-6 py-3 rounded-md font-medium shadow-sm transition-colors text-lg mt-4 bg-[#E0E7FF] hover:bg-[#c7d2fe] text-gray-800"
-              >
-                Component Demo →
-              </a>
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="text-center p-8 bg-white rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="text-5xl mb-4">📋</div>
+            <h3 className="text-xl font-bold text-gray-900 mb-3">
+              Smart Tasks
+            </h3>
+            <p className="text-gray-600">
+              Create, update, and organize tasks with natural language
+            </p>
+            <div className="mt-4 text-sm text-blue-600 font-medium">
+              → AI-powered task management
             </div>
           </div>
 
-          <KeyFilesSection />
+          <div className="text-center p-8 bg-white rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="text-5xl mb-4">🎯</div>
+            <h3 className="text-xl font-bold text-gray-900 mb-3">
+              Visual Boards
+            </h3>
+            <p className="text-gray-600">
+              Kanban boards, timelines, and team views
+            </p>
+            <div className="mt-4 text-sm text-purple-600 font-medium">
+              → Interactive project workflows
+            </div>
+          </div>
+
+          <div className="text-center p-8 bg-white rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="text-5xl mb-4">📊</div>
+            <h3 className="text-xl font-bold text-gray-900 mb-3">
+              Smart Analytics
+            </h3>
+            <p className="text-gray-600">
+              AI-powered insights and data visualization
+            </p>
+            <div className="mt-4 text-sm text-green-600 font-medium">
+              → Business intelligence dashboards
+            </div>
+          </div>
         </div>
-      </main>
+
+        {/* Trust Indicators */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-8 text-sm text-gray-500">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span>TypeScript & React 18+</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <span>Secure & Private</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <span>AI-Powered Intelligence</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="border-t border-gray-200 pt-8">
+          <div className="text-center text-sm text-gray-500">
+            <p>Built with Tambo AI • Next.js 15 • TypeScript</p>
+            <p className="mt-2">
+              © 2025 AI Project Manager. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
