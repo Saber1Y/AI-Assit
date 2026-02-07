@@ -1,9 +1,11 @@
 "use client";
 
 import { MessageThreadFull } from "@/components/tambo/message-thread-full";
+import { LinearAuthHelper } from "@/components/tambo/linear-auth-helper";
 import { useMcpServers } from "@/components/tambo/mcp-config-modal";
-import { components, tools } from "@/lib/tambo";
+import { components, tools, mcpServers } from "@/lib/tambo";
 import { TamboProvider } from "@tambo-ai/react";
+import { TamboMcpProvider } from "@tambo-ai/react/mcp";
 
 /**
  * Home page component that renders the Tambo chat interface.
@@ -16,8 +18,11 @@ import { TamboProvider } from "@tambo-ai/react";
  * @see {@link https://github.com/tambo-ai/tambo/blob/main/CONTRIBUTING.md} for instructions on running the API server locally.
  */
 export default function Home() {
-  // Load MCP server configurations
-  const mcpServers = useMcpServers();
+  // Load MCP server configurations from localStorage (for user-added servers)
+  const userMcpServers = useMcpServers();
+  
+  // Combine predefined servers with user-configured servers
+  const allMcpServers = [...mcpServers, ...userMcpServers];
 
   return (
     <TamboProvider
@@ -25,11 +30,18 @@ export default function Home() {
       components={components}
       tools={tools}
       tamboUrl={process.env.NEXT_PUBLIC_TAMBO_URL}
-      mcpServers={mcpServers}
+      mcpServers={allMcpServers}
     >
-      <div className="h-screen">
-        <MessageThreadFull />
-      </div>
+      <TamboMcpProvider>
+        <div className="h-screen flex flex-col">
+          <div className="flex-shrink-0 p-4">
+            <LinearAuthHelper />
+          </div>
+          <div className="flex-1">
+            <MessageThreadFull />
+          </div>
+        </div>
+      </TamboMcpProvider>
     </TamboProvider>
   );
 }

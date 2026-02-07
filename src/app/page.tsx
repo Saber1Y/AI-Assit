@@ -1,4 +1,3 @@
-import { ApiKeyCheck } from "@/components/ApiKeyCheck";
 import Image from "next/image";
 
 const KeyFilesSection = () => (
@@ -113,29 +112,27 @@ export default function Home() {
 
         <div className="w-full space-y-8">
           <div className="bg-white px-8 py-4">
-            <h2 className="text-xl font-semibold mb-4">Setup Checklist</h2>
-            <ApiKeyCheck>
-              <div className="flex gap-4 flex-wrap">
-                <a
-                  href="/analytics"
-                  className="px-6 py-3 rounded-md font-medium shadow-sm transition-colors text-lg mt-4 bg-[#7FFFC3] hover:bg-[#72e6b0] text-gray-800"
-                >
-                  Analytics Dashboard →
-                </a>
-                <a
-                  href="/chat"
-                  className="px-6 py-3 rounded-md font-medium shadow-sm transition-colors text-lg mt-4 bg-[#FFE17F] hover:bg-[#f5d570] text-gray-800"
-                >
-                  General Chat →
-                </a>
-                <a
-                  href="/interactables"
-                  className="px-6 py-3 rounded-md font-medium shadow-sm transition-colors text-lg mt-4 bg-[#E0E7FF] hover:bg-[#c7d2fe] text-gray-800"
-                >
-                  Component Demo →
-                </a>
-              </div>
-            </ApiKeyCheck>
+            <h2 className="text-xl font-semibold mb-4">Explore Features</h2>
+            <div className="flex gap-4 flex-wrap">
+              <a
+                href="/analytics"
+                className="px-6 py-3 rounded-md font-medium shadow-sm transition-colors text-lg mt-4 bg-[#7FFFC3] hover:bg-[#72e6b0] text-gray-800"
+              >
+                Analytics Dashboard →
+              </a>
+              <a
+                href="/chat"
+                className="px-6 py-3 rounded-md font-medium shadow-sm transition-colors text-lg mt-4 bg-[#FFE17F] hover:bg-[#f5d570] text-gray-800"
+              >
+                General Chat →
+              </a>
+              <a
+                href="/interactables"
+                className="px-6 py-3 rounded-md font-medium shadow-sm transition-colors text-lg mt-4 bg-[#E0E7FF] hover:bg-[#c7d2fe] text-gray-800"
+              >
+                Component Demo →
+              </a>
+            </div>
           </div>
 
           <KeyFilesSection />

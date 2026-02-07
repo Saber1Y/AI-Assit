@@ -2,8 +2,9 @@
 
 import { MessageThreadFull } from "@/components/tambo/message-thread-full";
 import { useMcpServers } from "@/components/tambo/mcp-config-modal";
-import { components, tools } from "@/lib/tambo";
+import { components, tools, mcpServers } from "@/lib/tambo";
 import { TamboProvider } from "@tambo-ai/react";
+import { TamboMcpProvider } from "@tambo-ai/react/mcp";
 import Link from "next/link";
 import { BarChart3, TrendingUp, Users, DollarSign } from "lucide-react";
 
@@ -14,8 +15,11 @@ import { BarChart3, TrendingUp, Users, DollarSign } from "lucide-react";
  * featuring quick actions, example queries, and contextual suggestions.
  */
 export default function AnalyticsDashboard() {
-  // Load MCP server configurations
-  const mcpServers = useMcpServers();
+  // Load MCP server configurations from localStorage (for user-added servers)
+  const userMcpServers = useMcpServers();
+  
+  // Combine predefined servers with user-configured servers
+  const allMcpServers = [...mcpServers, ...userMcpServers];
 
   // Quick action queries
   const quickQueries = [
@@ -63,8 +67,9 @@ export default function AnalyticsDashboard() {
       components={components}
       tools={tools}
       tamboUrl={process.env.NEXT_PUBLIC_TAMBO_URL}
-      mcpServers={mcpServers}
+      mcpServers={allMcpServers}
     >
+      <TamboMcpProvider>
       <div className="h-screen flex">
         {/* Sidebar with Quick Actions */}
         <div className="w-80 border-r border-border bg-muted/30 p-6 overflow-y-auto">
@@ -196,6 +201,7 @@ export default function AnalyticsDashboard() {
           </div>
         </div>
       </div>
+      </TamboMcpProvider>
     </TamboProvider>
   );
 }

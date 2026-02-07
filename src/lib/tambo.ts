@@ -15,6 +15,8 @@ import { Heatmap, heatmapSchema } from "@/components/tambo/heatmap";
 import { Funnel, funnelSchema } from "@/components/tambo/funnel";
 import { DataTable, dataTableSchema } from "@/components/tambo/data-table";
 import { InsightCard, insightCardSchema } from "@/components/tambo/insight-card";
+import { LinearIssue, linearIssueSchema } from "@/components/tambo/linear-issue";
+import { LinearIssueList, linearIssueListSchema } from "@/components/tambo/linear-issue-list";
 import {
   getCountryPopulations,
   getGlobalPopulationTrend,
@@ -25,8 +27,8 @@ import {
   stripeService,
   databaseService,
 } from "@/services/analytics";
-import type { TamboComponent } from "@tambo-ai/react";
-import { TamboTool } from "@tambo-ai/react";
+import type { TamboComponent, McpServerInfo } from "@tambo-ai/react";
+import { TamboTool, MCPTransport } from "@tambo-ai/react";
 import { z } from "zod";
 
 /**
@@ -283,5 +285,34 @@ export const components: TamboComponent[] = [
       "An AI-powered insight card that displays data-driven insights with confidence scores, impact levels, and actionable recommendations. Supports expandable suggested actions.",
     component: InsightCard,
     propsSchema: insightCardSchema,
+  },
+  {
+    name: "LinearIssue",
+    description:
+      "A component that displays a single Linear issue with all relevant information including status, priority, assignee, project, labels, and timestamps. Includes visual indicators for priority and status.",
+    component: LinearIssue,
+    propsSchema: linearIssueSchema,
+  },
+  {
+    name: "LinearIssueList",
+    description:
+      "A component that displays a list of Linear issues with optional grouping by status, priority, project, or assignee. Supports title, item limiting, and empty state handling.",
+    component: LinearIssueList,
+    propsSchema: linearIssueListSchema,
+  },
+];
+
+/**
+ * mcpServers
+ *
+ * This array contains all the MCP (Model Context Protocol) servers that are registered
+ * for use within the application. Each server provides external tools and capabilities
+ * that can be accessed by AI through the standardized MCP interface.
+ */
+export const mcpServers: McpServerInfo[] = [
+  {
+    name: "Linear",
+    url: "https://mcp.linear.app/mcp",
+    transport: MCPTransport.HTTP,
   },
 ];
