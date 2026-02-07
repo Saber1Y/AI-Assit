@@ -16,21 +16,20 @@ import {
 
 // Define the props schema with descriptions for AI
 export const taskCardSchema = z.object({
-  id: z.string().describe("Unique identifier for the task"),
-  title: z.string().describe("Title/name of the task"),
-  description: z.string().optional().describe("Optional description of what the task involves"),
-  status: z.enum(["todo", "in-progress", "review", "done"]).describe("Current status of the task"),
-  priority: z.enum(["low", "medium", "high", "critical"]).describe("Priority level of the task"),
+  id: z.string().describe("Unique identifier for task"),
+  title: z.string().describe("Title/name of task"),
+  description: z.string().optional().describe("Optional description of what task involves"),
+  status: z.enum(["todo", "in-progress", "review", "done"]).describe("Current status of task"),
+  priority: z.enum(["low", "medium", "high", "critical"]).describe("Priority level of task"),
   assignee: z.string().optional().describe("Person assigned to this task"),
   dueDate: z.string().optional().describe("Due date in ISO format"),
   createdDate: z.string().describe("Date when task was created in ISO format"),
   updatedDate: z.string().describe("Date when task was last updated in ISO format"),
-  project: z.string().describe("Name of the project this task belongs to"),
-  tags: z.array(z.string()).optional().describe("Array of tags associated with the task"),
-  estimatedHours: z.number().optional().describe("Estimated hours to complete the task"),
-  actualHours: z.number().optional().describe("Actual hours spent on the task"),
-  compact: z.boolean().optional().describe("Whether to show a compact version of the card"),
-  onClick: z.function().optional().describe("Optional click handler for the card"),
+  project: z.string().describe("Name of project this task belongs to"),
+  tags: z.array(z.string()).optional().describe("Array of tags associated with task"),
+  estimatedHours: z.number().optional().describe("Estimated hours to complete task"),
+  actualHours: z.number().optional().describe("Actual hours spent on task"),
+  compact: z.boolean().optional().describe("Whether to show a compact version of card"),
 }).describe("A card component that displays task information with status, priority, and metadata");
 
 // Infer the props type from the schema

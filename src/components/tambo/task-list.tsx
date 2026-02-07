@@ -37,7 +37,7 @@ export const taskListSchema = z.object({
   showFilters: z.boolean().optional().describe("Whether to show filter controls"),
   compact: z.boolean().optional().describe("Whether to show compact version of cards"),
   searchable: z.boolean().optional().describe("Whether to include search functionality"),
-  groupBy: z.enum(["status", "priority", "assignee", "project", "none"]).optional().describe("How to group the tasks"),
+  groupBy: z.enum(["status", "priority", "assignee", "project", "none"]).optional().describe("How to group tasks"),
   emptyMessage: z.string().optional().describe("Message to show when no tasks are found"),
 }).describe("A component that displays a list or grid of tasks with optional filtering, searching, and grouping");
 

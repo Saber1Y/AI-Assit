@@ -71,21 +71,49 @@ const KeyFilesSection = () => (
     </ul>
     <div className="flex gap-4 flex-wrap mt-4">
       <a
-        href="https://docs.tambo.co"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="px-6 py-3 rounded-md font-medium transition-colors text-lg mt-4 border border-gray-300 hover:bg-gray-50"
+        href="/projects"
+        className="px-6 py-3 rounded-md font-medium transition-colors text-lg mt-4 bg-[#7FFFC3] hover:bg-[#72e6b0] text-gray-800"
       >
-        View Docs
+        🎯 AI Project Manager →
       </a>
       <a
-        href="https://tambo.co/dashboard"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="px-6 py-3 rounded-md font-medium transition-colors text-lg mt-4 border border-gray-300 hover:bg-gray-50"
+        href="/chat"
+        className="px-6 py-3 rounded-md font-medium transition-colors text-lg mt-4 bg-[#FFE17F] hover:bg-[#f5d570] text-gray-800"
       >
-        Dashboard
+        💬 General Chat →
       </a>
+      <a
+        href="/analytics"
+        className="px-6 py-3 rounded-md font-medium transition-colors text-lg mt-4 bg-[#E0E7FF] hover:bg-[#c7d2fe] text-gray-800"
+      >
+        📊 Analytics Dashboard →
+      </a>
+        <a
+        href="/interactables"
+        className="px-6 py-3 rounded-md font-medium transition-colors text-lg mt-4 bg-[#E0E7FF] hover:bg-[#c7d2fe] text-gray-800"
+      >
+        🎨 Component Demo →
+      </a>
+    </div>
+    
+    <div className="mt-8 p-6 bg-gray-50 rounded-lg border border-gray-200">
+      <h3 className="text-lg font-semibold text-gray-900 mb-4">✨ New Integrations</h3>
+      <div className="space-y-3 text-sm text-gray-700">
+        <div>
+          <strong>🔗 Linear MCP Integration:</strong> Connect to Linear for real-time project management with OAuth authentication.
+        </div>
+        <div>
+          <strong>🎯 AI Project Manager:</strong> Complete project management UI with kanban boards, team workload, and interactive components.
+        </div>
+      </div>
+      <div className="mt-4">
+        <a 
+          href="/projects" 
+          className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+        >
+          Try AI Project Manager
+        </a>
+      </div>
     </div>
   </div>
 );

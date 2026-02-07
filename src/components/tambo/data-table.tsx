@@ -51,7 +51,7 @@ const tableColumnSchema = z.object({
  * Zod schema for Data Table component
  */
 export const dataTableSchema = z.object({
-  data: z.array(z.record(z.string(), z.any())).describe("Array of row data"),
+  data: z.array(z.any()).describe("Array of row data"),
   columns: z.array(tableColumnSchema).describe("Column definitions"),
   title: z.string().optional().describe("Title for the table"),
   variant: z.enum(["default", "compact", "bordered"]).optional().describe("Visual style variant"),

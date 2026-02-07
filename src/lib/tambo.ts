@@ -17,10 +17,20 @@ import { DataTable, dataTableSchema } from "@/components/tambo/data-table";
 import { InsightCard, insightCardSchema } from "@/components/tambo/insight-card";
 import { LinearIssue, linearIssueSchema } from "@/components/tambo/linear-issue";
 import { LinearIssueList, linearIssueListSchema } from "@/components/tambo/linear-issue-list";
+import { TaskList, taskListSchema } from "@/components/tambo/task-list";
+import { TaskCard, taskCardSchema } from "@/components/tambo/task-card";
+import { KanbanBoard, kanbanBoardSchema } from "@/components/tambo/kanban-board";
+import { TeamWorkload, teamWorkloadSchema } from "@/components/tambo/team-workload";
 import {
   getCountryPopulations,
   getGlobalPopulationTrend,
 } from "@/services/population-stats";
+import {
+  getTasks,
+  createTask,
+  updateTaskStatus,
+  getProjects,
+} from "@/services/project-management";
 import {
   analyticsService,
   googleAnalyticsService,
@@ -227,6 +237,120 @@ export const tools: TamboTool[] = [
       }),
     ),
   },
+  // Project Management Tools
+  {
+    name: "getTasks",
+    description: "Get tasks with optional filtering and sorting capabilities",
+    tool: getTasks,
+    inputSchema: z.object({
+      status: z.enum(["todo", "in-progress", "review", "done"]).optional(),
+      priority: z.enum(["low", "medium", "high", "critical"]).optional(),
+      assignee: z.string().optional(),
+      project: z.string().optional(),
+      overdue: z.boolean().optional(),
+      sortBy: z.enum(["dueDate", "priority", "createdDate"]).optional(),
+      sortOrder: z.enum(["asc", "desc"]).optional(),
+    }),
+    outputSchema: z.array(
+      z.object({
+        id: z.string(),
+        title: z.string(),
+        description: z.string().optional(),
+        status: z.enum(["todo", "in-progress", "review", "done"]),
+        priority: z.enum(["low", "medium", "high", "critical"]),
+        assignee: z.string().optional(),
+        dueDate: z.string().optional(),
+        createdDate: z.string(),
+        updatedDate: z.string(),
+        project: z.string(),
+        tags: z.array(z.string()).optional(),
+        estimatedHours: z.number().optional(),
+        actualHours: z.number().optional(),
+      }),
+    ),
+  },
+  {
+    name: "createTask",
+    description: "Create a new task with the provided details",
+    tool: createTask,
+    inputSchema: z.object({
+      title: z.string().describe("Title of the task"),
+      description: z.string().optional().describe("Optional description of the task"),
+      status: z.enum(["todo", "in-progress", "review", "done"]).optional().describe("Initial status of the task"),
+      priority: z.enum(["low", "medium", "high", "critical"]).optional().describe("Priority level of the task"),
+      assignee: z.string().optional().describe("Person to assign the task to"),
+      dueDate: z.string().optional().describe("Due date for the task"),
+      project: z.string().describe("Project this task belongs to"),
+      tags: z.array(z.string()).optional().describe("Tags associated with the task"),
+      estimatedHours: z.number().optional().describe("Estimated hours to complete"),
+    }),
+    outputSchema: z.object({
+      id: z.string(),
+      title: z.string(),
+      description: z.string().optional(),
+      status: z.enum(["todo", "in-progress", "review", "done"]),
+      priority: z.enum(["low", "medium", "high", "critical"]),
+      assignee: z.string().optional(),
+      dueDate: z.string().optional(),
+      createdDate: z.string(),
+      updatedDate: z.string(),
+      project: z.string(),
+      tags: z.array(z.string()).optional(),
+      estimatedHours: z.number().optional(),
+      actualHours: z.number().optional(),
+    }),
+  },
+  {
+    name: "updateTaskStatus",
+    description: "Update an existing task's status or other properties",
+    tool: async (params: { taskId: string; status?: string; priority?: string; assignee?: string; dueDate?: string }) => {
+      return await updateTaskStatus(params.taskId, {
+        status: params.status as any,
+        priority: params.priority as any,
+        assignee: params.assignee,
+        dueDate: params.dueDate,
+      });
+    },
+    inputSchema: z.object({
+      taskId: z.string().describe("ID of the task to update"),
+      status: z.enum(["todo", "in-progress", "review", "done"]).optional().describe("New status for the task"),
+      priority: z.enum(["low", "medium", "high", "critical"]).optional().describe("New priority for the task"),
+      assignee: z.string().optional().describe("New assignee for the task"),
+      dueDate: z.string().optional().describe("New due date for the task"),
+    }),
+    outputSchema: z.object({
+      id: z.string(),
+      title: z.string(),
+      description: z.string().optional(),
+      status: z.enum(["todo", "in-progress", "review", "done"]),
+      priority: z.enum(["low", "medium", "high", "critical"]),
+      assignee: z.string().optional(),
+      dueDate: z.string().optional(),
+      createdDate: z.string(),
+      updatedDate: z.string(),
+      project: z.string(),
+      tags: z.array(z.string()).optional(),
+      estimatedHours: z.number().optional(),
+      actualHours: z.number().optional(),
+    }),
+  },
+  {
+    name: "getProjects",
+    description: "Get all projects with their details",
+    tool: getProjects,
+    inputSchema: z.object({}).optional(),
+    outputSchema: z.array(
+      z.object({
+        id: z.string(),
+        name: z.string(),
+        description: z.string().optional(),
+        status: z.enum(["active", "completed", "on-hold"]),
+        startDate: z.string(),
+        endDate: z.string().optional(),
+        members: z.array(z.string()),
+      }),
+    ),
+  },
 ];
 
 /**
@@ -299,6 +423,34 @@ export const components: TamboComponent[] = [
       "A component that displays a list of Linear issues with optional grouping by status, priority, project, or assignee. Supports title, item limiting, and empty state handling.",
     component: LinearIssueList,
     propsSchema: linearIssueListSchema,
+  },
+  {
+    name: "TaskList",
+    description:
+      "A flexible component for displaying tasks with various view modes (grid/list), filtering, searching, and grouping capabilities. Supports both compact and full card views with real-time updates.",
+    component: TaskList,
+    propsSchema: taskListSchema,
+  },
+  {
+    name: "TaskCard",
+    description:
+      "A versatile card component for displaying individual task information with different visual states based on status and priority. Supports both full and compact views with metadata display.",
+    component: TaskCard,
+    propsSchema: taskCardSchema,
+  },
+  {
+    name: "KanbanBoard",
+    description:
+      "A kanban board component that organizes tasks into columns by status with drag-and-drop visual cues, column counts, and responsive design. Supports custom columns and compact views.",
+    component: KanbanBoard,
+    propsSchema: kanbanBoardSchema,
+  },
+  {
+    name: "TeamWorkload",
+    description:
+      "A team workload visualization component showing capacity utilization, task distribution, and availability across team members. Features progress bars, status indicators, and detailed breakdowns.",
+    component: TeamWorkload,
+    propsSchema: teamWorkloadSchema,
   },
 ];
 
