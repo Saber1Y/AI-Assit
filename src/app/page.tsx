@@ -105,7 +105,10 @@ export default function Home() {
               className="mb-4"
             />
           </a>
-          <h1 className="text-4xl text-center">tambo-ai chat template</h1>
+          <h1 className="text-4xl text-center">Generative Analytics Dashboard</h1>
+          <p className="text-lg text-muted-foreground text-center mt-2">
+            AI-powered data visualization and business intelligence
+          </p>
         </div>
 
         <div className="w-full space-y-8">
@@ -114,16 +117,22 @@ export default function Home() {
             <ApiKeyCheck>
               <div className="flex gap-4 flex-wrap">
                 <a
-                  href="/chat"
+                  href="/analytics"
                   className="px-6 py-3 rounded-md font-medium shadow-sm transition-colors text-lg mt-4 bg-[#7FFFC3] hover:bg-[#72e6b0] text-gray-800"
                 >
-                  Go to Chat →
+                  Analytics Dashboard →
+                </a>
+                <a
+                  href="/chat"
+                  className="px-6 py-3 rounded-md font-medium shadow-sm transition-colors text-lg mt-4 bg-[#FFE17F] hover:bg-[#f5d570] text-gray-800"
+                >
+                  General Chat →
                 </a>
                 <a
                   href="/interactables"
-                  className="px-6 py-3 rounded-md font-medium shadow-sm transition-colors text-lg mt-4 bg-[#FFE17F] hover:bg-[#f5d570] text-gray-800"
+                  className="px-6 py-3 rounded-md font-medium shadow-sm transition-colors text-lg mt-4 bg-[#E0E7FF] hover:bg-[#c7d2fe] text-gray-800"
                 >
-                  Interactables Demo →
+                  Component Demo →
                 </a>
               </div>
             </ApiKeyCheck>
