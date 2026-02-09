@@ -1034,7 +1034,12 @@ const MessageInputSubmitButton = React.forwardRef<
   };
 
   const buttonClasses = cn(
-    "w-10 h-10 p-8 bg-foreground text-background rounded-lg hover:bg-foreground/90 disabled:opacity-50 flex items-center justify-center enabled:cursor-pointer",
+    "w-10 h-10 p-0 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-all duration-200 shadow-sm hover:shadow-md hover:scale-105 active:scale-95",
+    className,
+  );
+
+  const cancelButtonClasses = cn(
+    "w-10 h-10 p-0 bg-gray-500 hover:bg-gray-600 active:bg-gray-700 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-all duration-200 shadow-sm hover:shadow-md hover:scale-105 active:scale-95",
     className,
   );
 
@@ -1044,7 +1049,7 @@ const MessageInputSubmitButton = React.forwardRef<
       type={showCancelButton ? "button" : "submit"}
       disabled={isUpdatingToken}
       onClick={showCancelButton ? handleCancel : undefined}
-      className={buttonClasses}
+      className={showCancelButton ? cancelButtonClasses : buttonClasses}
       aria-label={showCancelButton ? "Cancel message" : "Send message"}
       data-slot={
         showCancelButton ? "message-input-cancel" : "message-input-submit"
