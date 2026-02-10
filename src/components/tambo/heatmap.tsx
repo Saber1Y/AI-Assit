@@ -44,7 +44,7 @@ const heatmapDataPointSchema = z.object({
  * Zod schema for Heatmap component
  */
 export const heatmapSchema = z.object({
-  data: z.array(heatmapDataPointSchema).describe("Array of heatmap data points"),
+  data: z.array(heatmapDataPointSchema).min(1).describe("Array of heatmap data points"),
   title: z.string().optional().describe("Title for the heatmap"),
   xAxisLabel: z.string().optional().describe("Label for X-axis"),
   yAxisLabel: z.string().optional().describe("Label for Y-axis"),

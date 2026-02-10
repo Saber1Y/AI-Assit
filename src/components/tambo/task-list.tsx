@@ -32,7 +32,7 @@ export const taskListSchema = z.object({
       estimatedHours: z.number().optional(),
       actualHours: z.number().optional(),
     })
-  ).describe("Array of tasks to display"),
+  ).min(1).describe("Array of tasks to display"),
   viewMode: z.enum(["grid", "list"]).optional().describe("Display mode - grid or list layout"),
   showFilters: z.boolean().optional().describe("Whether to show filter controls"),
   compact: z.boolean().optional().describe("Whether to show compact version of cards"),

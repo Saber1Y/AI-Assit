@@ -23,7 +23,7 @@ export const teamWorkloadSchema = z.object({
       skillSet: z.array(z.string()).optional().describe("Array of skills or specializations"),
       status: z.enum(["available", "busy", "overloaded", "unavailable"]).optional().describe("Current availability status"),
     })
-  ).describe("Array of team members with their workload information"),
+  ).min(1).describe("Array of team members with their workload information"),
   timeRange: z.enum(["today", "week", "month", "sprint"]).optional().describe("Time period for workload calculation"),
   showDetails: z.boolean().optional().describe("Whether to show detailed breakdown"),
   compact: z.boolean().optional().describe("Whether to show compact version"),

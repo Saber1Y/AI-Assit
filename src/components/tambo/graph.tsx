@@ -107,15 +107,16 @@ class GraphErrorBoundary extends React.Component<
  */
 export const graphDataSchema = z.object({
   type: z.enum(["bar", "line", "pie"]).describe("Type of graph to render"),
-  labels: z.array(z.string()).describe("Labels for the graph"),
+  labels: z.array(z.string()).min(1).describe("Labels for the graph"),
   datasets: z
     .array(
       z.object({
         label: z.string().describe("Label for the dataset"),
-        data: z.array(z.number()).describe("Data points for the dataset"),
+        data: z.array(z.number()).min(1).describe("Data points for the dataset"),
         color: z.string().optional().describe("Optional color for the dataset"),
       }),
     )
+    .min(1)
     .describe("Data for the graph"),
 });
 

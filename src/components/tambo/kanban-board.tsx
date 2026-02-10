@@ -23,7 +23,7 @@ export const kanbanBoardSchema = z.object({
       estimatedHours: z.number().optional(),
       actualHours: z.number().optional(),
     })
-  ).describe("Array of tasks to display in kanban columns"),
+  ).min(1).describe("Array of tasks to display in kanban columns"),
   columns: z.array(z.string()).optional().describe("Custom column names. Defaults to standard workflow columns"),
   compact: z.boolean().optional().describe("Whether to show compact version of cards"),
   showColumnCounts: z.boolean().optional().describe("Whether to show task count in column headers"),
