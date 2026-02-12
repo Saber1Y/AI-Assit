@@ -12,9 +12,9 @@ import {
 
 // Define props schema
 export const teamWorkloadSchema = z.object({
-  teamMembers: z.array(
+teamMembers: z.array(
     z.object({
-      name: z.string().describe("Name of the team member"),
+      name: z.string().describe("Name of team member"),
       assignedHours: z.number().describe("Total hours assigned to this person"),
       completedHours: z.number().optional().describe("Total hours completed by this person"),
       capacity: z.number().optional().describe("Maximum work capacity in hours"),
@@ -23,11 +23,11 @@ export const teamWorkloadSchema = z.object({
       skillSet: z.array(z.string()).optional().describe("Array of skills or specializations"),
       status: z.enum(["available", "busy", "overloaded", "unavailable"]).optional().describe("Current availability status"),
     })
-  ).min(1).describe("Array of team members with their workload information"),
+  ).describe("Array of team members with their workload information"),
   timeRange: z.enum(["today", "week", "month", "sprint"]).optional().describe("Time period for workload calculation"),
   showDetails: z.boolean().optional().describe("Whether to show detailed breakdown"),
-  compact: z.boolean().optional().describe("Whether to show compact version"),
-}).describe("A team workload visualization component showing capacity utilization, task distribution, and availability across team members");
+compact: z.boolean().optional().describe("Whether to show compact version"),
+ }).describe("A team workload visualization component showing capacity utilization, task distribution, and availability across team members");
 
 // Infer props type
 export type TeamWorkloadProps = z.infer<typeof teamWorkloadSchema> & 

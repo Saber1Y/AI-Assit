@@ -23,12 +23,12 @@ export const kanbanBoardSchema = z.object({
       estimatedHours: z.number().optional(),
       actualHours: z.number().optional(),
     })
-  ).min(1).describe("Array of tasks to display in kanban columns"),
+  ).describe("Array of tasks to display in kanban columns"),
   columns: z.array(z.string()).optional().describe("Custom column names. Defaults to standard workflow columns"),
   compact: z.boolean().optional().describe("Whether to show compact version of cards"),
   showColumnCounts: z.boolean().optional().describe("Whether to show task count in column headers"),
-  emptyMessage: z.string().optional().describe("Message to show when no tasks are found"),
-}).describe("A kanban board component that displays tasks in columns by status with drag-and-drop visual organization");
+emptyMessage: z.string().optional().describe("Message to show when no tasks are found"),
+ }).describe("A kanban board component that displays tasks in columns by status with drag-and-drop visual organization");
 
 // Infer props type
 export type KanbanBoardProps = z.infer<typeof kanbanBoardSchema> & 

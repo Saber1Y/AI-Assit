@@ -32,14 +32,14 @@ export const taskListSchema = z.object({
       estimatedHours: z.number().optional(),
       actualHours: z.number().optional(),
     })
-  ).min(1).describe("Array of tasks to display"),
+  ).describe("Array of tasks to display"),
   viewMode: z.enum(["grid", "list"]).optional().describe("Display mode - grid or list layout"),
   showFilters: z.boolean().optional().describe("Whether to show filter controls"),
   compact: z.boolean().optional().describe("Whether to show compact version of cards"),
   searchable: z.boolean().optional().describe("Whether to include search functionality"),
   groupBy: z.enum(["status", "priority", "assignee", "project", "none"]).optional().describe("How to group tasks"),
-  emptyMessage: z.string().optional().describe("Message to show when no tasks are found"),
-}).describe("A component that displays a list or grid of tasks with optional filtering, searching, and grouping");
+emptyMessage: z.string().optional().describe("Message to show when no tasks are found"),
+ }).describe("A component that displays a list or grid of tasks with optional filtering, searching, and grouping");
 
 // Infer the props type
 export type TaskListProps = z.infer<typeof taskListSchema> & 

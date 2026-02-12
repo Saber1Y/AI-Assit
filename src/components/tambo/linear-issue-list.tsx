@@ -8,7 +8,7 @@ import { z } from "zod";
  * Schema for Linear issue list component
  */
 export const linearIssueListSchema = z.object({
-  issues: z.array(linearIssueSchema).min(1),
+  issues: z.array(linearIssueSchema),
   title: z.string().optional(),
   showProject: z.boolean().optional(),
   showAssignee: z.boolean().optional(),

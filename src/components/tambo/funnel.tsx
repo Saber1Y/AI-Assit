@@ -45,7 +45,7 @@ const funnelStageSchema = z.object({
  * Zod schema for Funnel component
  */
 export const funnelSchema = z.object({
-  data: z.array(funnelStageSchema).min(1).describe("Array of funnel stage data"),
+  data: z.array(funnelStageSchema).describe("Array of funnel stage data"),
   title: z.string().optional().describe("Title for the funnel"),
   variant: z.enum(["default", "compact", "horizontal"]).optional().describe("Visual style variant"),
   showDropoffDetails: z.boolean().optional().describe("Whether to show detailed dropoff information"),
